@@ -13,11 +13,11 @@ import org.apache.storm.hive.bolt.HiveBolt;
 import org.apache.storm.hive.bolt.mapper.DelimitedRecordHiveMapper;
 import org.apache.storm.hive.common.HiveOptions;
 
-import backtype.storm.Config;
-import backtype.storm.LocalCluster;
-import backtype.storm.StormSubmitter;
-import backtype.storm.topology.TopologyBuilder;
-import backtype.storm.tuple.Fields;
+import org.apache.storm.Config;
+import org.apache.storm.LocalCluster;
+import org.apache.storm.StormSubmitter;
+import org.apache.storm.topology.TopologyBuilder;
+import org.apache.storm.tuple.Fields;
 import fr.pvillard.storm.bolt.TweetCounterBolt;
 import fr.pvillard.storm.bolt.TweetSplitterBolt;
 import fr.pvillard.storm.custom.CustomHdfsBolt;
@@ -31,11 +31,11 @@ public class Topology {
     /** name of the topology */
     static final String TOPOLOGY_NAME = "storm-twitter"; //$NON-NLS-1$
     /** words for filtering */
-    static final String[] FILTERS = new String[]{"hortonworks", "hadoop", "spark", "hive", "hdfs"}; //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$ //$NON-NLS-5$
+    static final String[] FILTERS = new String[]{"Mirage", "Mandalay Bay", "Mandarin Oriental", "Cosmopolitan", "Caesars Palace", "Venetian-Palazzo", "Wynn Encore", "Bellagio", "Aria"}; //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$ //$NON-NLS-5$
     /** metastore URI for Hive */
-    static final String META_STORE_URI = "thrift://ip-172-31-30-70.eu-central-1.compute.internal:9083"; //$NON-NLS-1$
+    static final String META_STORE_URI = "thrift://ip-172-31-39-125.ec2.internal:9083"; //$NON-NLS-1$
     /** cluster is HA */
-    static final String HDFS = "hdfs://mycluster"; //$NON-NLS-1$
+    static final String HDFS = "hdfs://ip-172-31-32-129.ec2.internal"; //$NON-NLS-1$
     /** Hive database */
     static final String DATABASE = "default"; //$NON-NLS-1$
     /** Hive table */
@@ -72,7 +72,7 @@ public class Topology {
 
         // define bolt to store data in HDFS
         FileNameFormat fileNameFormat = new DefaultFileNameFormat().withPrefix("twitter").withExtension(".txt") //$NON-NLS-1$ //$NON-NLS-2$
-                .withPath("/storm"); //$NON-NLS-1$
+                .withPath("/user/storm_exercise"); //$NON-NLS-1$
 
         RecordFormat recordFormat = new DelimitedRecordFormat().withFields(fields);
         FileRotationPolicy rotationPolicy = new FileSizeRotationPolicy(5.0f, FileSizeRotationPolicy.Units.MB);

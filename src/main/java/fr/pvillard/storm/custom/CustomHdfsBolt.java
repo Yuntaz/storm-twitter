@@ -9,8 +9,8 @@ import org.apache.hadoop.fs.FileSystem;
 import org.apache.hadoop.fs.Path;
 import org.apache.storm.hdfs.bolt.HdfsBolt;
 
-import backtype.storm.task.OutputCollector;
-import backtype.storm.task.TopologyContext;
+import org.apache.storm.task.OutputCollector;
+import org.apache.storm.task.TopologyContext;
 
 /**
  * Custom overriding of the bolt to specify the correct HDFS configuration files
