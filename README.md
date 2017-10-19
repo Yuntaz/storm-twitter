@@ -24,9 +24,9 @@ Create the tweet_counts Hive table corresponding to your needs :
 	CREATE TABLE tweet_counts(filter string, tickdate timestamp, totalcount int)
     CLUSTERED BY (filter) INTO 5 BUCKETS
     STORED AS ORC
-	LOCATION '/user/storm_exercise'
-	TBLPROPERTIES ("orc.compress"="SNAPPY");
-
+	TBLPROPERTIES ("orc.compress"="SNAPPY", "transactional"="true");
+	
+	
 ## Troubleshooting
 
 The most common issue is not having sufficient access rights for hdfs://tmp/hive and file:///tmp/hive Set the access rights to 777 like this:
