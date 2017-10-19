@@ -20,9 +20,11 @@ To run the topology :
 
 Create the tweet_counts Hive table corresponding to your needs :
 
-    CREATE TABLE tweet_counts(filter string, tickdate timestamp, totalcount int)
+    DROP TABLE IF EXISTS tweet_counts;
+	CREATE TABLE tweet_counts(filter string, tickdate timestamp, totalcount int)
     CLUSTERED BY (filter) INTO 5 BUCKETS
     STORED AS ORC
+	LOCATION '/user/storm_exercise'
 	TBLPROPERTIES ("orc.compress"="SNAPPY");
 
 ## Troubleshooting
@@ -35,11 +37,10 @@ The most common issue is not having sufficient access rights for hdfs://tmp/hive
 In case of error, extend the connection timeout of the Writer like:
 	
 	hiveOptions = new HiveOptions(metaStoreURI, dbName, tblName, mapper)
-									.withBatchSize(100)
-									.withTxnsPerBatch(2)
-									.withIdleTimeout(10)
-									.withCallTimeout(10000000);	
-	
+						.withBatchSize(100)
+						.withTxnsPerBatch(2)
+						.withIdleTimeout(10)
+						.withCallTimeout(10000000);	
 	
 ## Example
 

@@ -31,7 +31,7 @@ public class Topology {
     /** name of the topology */
     static final String TOPOLOGY_NAME = "storm-twitter"; //$NON-NLS-1$
     /** words for filtering */
-    static final String[] FILTERS = new String[]{"Mirage", "Mandalay Bay", "Mandarin Oriental", "Cosmopolitan", "Caesars Palace", "Venetian-Palazzo", "Wynn Encore", "Bellagio", "Aria"}; //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$ //$NON-NLS-5$
+    static final String[] FILTERS = new String[]{"Argentina", "Mexico", "Brasil", "EEUU", "Uruguay", "Chile", "Ecuador", "Bolivia", "Paraguay", "Peru", "Colombia", "Venezuela", "Guatemala", "Panama", "Costa Rica", "Cuba", "Canada", "Nicaragua"}; //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$ //$NON-NLS-5$
     /** metastore URI for Hive */
     static final String META_STORE_URI = "thrift://ip-172-31-39-125.ec2.internal:9083"; //$NON-NLS-1$
     /** cluster is HA */
