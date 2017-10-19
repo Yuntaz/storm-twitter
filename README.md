@@ -22,8 +22,25 @@ Create the tweet_counts Hive table corresponding to your needs :
 
     CREATE TABLE tweet_counts(filter string, tickdate timestamp, totalcount int)
     CLUSTERED BY (filter) INTO 5 BUCKETS
-    STORED AS ORC;
+    STORED AS ORC
+	TBLPROPERTIES ("orc.compress"="SNAPPY");
 
+## Troubleshooting
+
+The most common issue is not having sufficient access rights for hdfs://tmp/hive and file:///tmp/hive Set the access rights to 777 like this:
+
+	$ sudo su - hdfs -c "hdfs dfs -chmod 777 /tmp/hive"
+
+
+In case of error, extend the connection timeout of the Writer like:
+	
+	hiveOptions = new HiveOptions(metaStoreURI, dbName, tblName, mapper)
+									.withBatchSize(100)
+									.withTxnsPerBatch(2)
+									.withIdleTimeout(10)
+									.withCallTimeout(10000000);	
+	
+	
 ## Example
 
 What we can view in the Hive view in Ambari (Hortonworks distribution) :
