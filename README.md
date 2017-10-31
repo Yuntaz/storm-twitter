@@ -26,6 +26,12 @@ Create the tweet_counts Hive table corresponding to your needs :
     STORED AS ORC
 	TBLPROPERTIES ("orc.compress"="SNAPPY", "transactional"="true");
 	
+    DROP TABLE IF EXISTS ext_tweet_counts;	
+	CREATE EXTERNAL ext_tweet_counts(filter string, tickdate timestamp, totalcount int)
+    CLUSTERED BY (filter) INTO 5 BUCKETS
+	ROW FORMAT DELIMITED
+	FIELDS TERMINATED BY ','
+	LOCATION '/user/storm_exercise'
 	
 ## Troubleshooting
 

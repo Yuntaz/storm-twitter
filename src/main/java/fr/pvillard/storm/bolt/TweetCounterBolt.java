@@ -107,22 +107,13 @@ public class TweetCounterBolt extends BaseRichBolt {
     @Override
     public void execute(Tuple input) {
 
-        if (isTickTuple(input)) {
-            for (String filter : this.filters) {
-                System.out.println("TICK with [" + filter + "]"); //$NON-NLS-1$ //$NON-NLS-2$
-                SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm"); //$NON-NLS-1$
-                Date date = new Date();
-                this.collector.emit(new Values(filter, format.format(date) + ":00", this.counter.get(filter))); //$NON-NLS-1$
-                // System.out.println("Number of tweet with [" + filter + "] at
-                // [" + format.format(date) + "] : " + counter.get(filter));
-                this.counter.put(filter, 0L);
-            }
-        } else {
-            String filter = (String) input.getValueByField("filter"); //$NON-NLS-1$
-            Long count = this.counter.get(filter);
-            count = count == null ? 1L : count + 1;
-            this.counter.put(filter, count);
-        }
+		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm"); //$NON-NLS-1$
+		Date date = new Date();
+		String filter = (String) input.getValueByField("filter"); //$NON-NLS-1$
+		Long count = this.counter.get(filter);
+		count = count == null ? 1L : count + 1;
+		this.counter.put(filter, count);
+		this.collector.emit(new Values(filter, format.format(date) + ":00", this.counter.get(filter))); //$NON-NLS-1$
 
     }
 

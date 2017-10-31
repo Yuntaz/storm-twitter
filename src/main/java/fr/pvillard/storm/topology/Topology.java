@@ -84,13 +84,13 @@ public class Topology {
         b.setBolt("TweetHdfsBolt", bolt, 1).allGrouping("TweetCounterBolt"); //$NON-NLS-1$ //$NON-NLS-2$
 
         // define bolt to store data in Hive
-        DelimitedRecordHiveMapper mapper = new DelimitedRecordHiveMapper().withColumnFields(fields);
-        HiveOptions hiveOptions = new HiveOptions(META_STORE_URI, DATABASE, TABLE, mapper).withTxnsPerBatch(2)
-                .withBatchSize(100).withIdleTimeout(10).withCallTimeout(10000000);					
+        //DelimitedRecordHiveMapper mapper = new DelimitedRecordHiveMapper().withColumnFields(fields);
+        //HiveOptions hiveOptions = new HiveOptions(META_STORE_URI, DATABASE, TABLE, mapper).withTxnsPerBatch(2)
+        //        .withBatchSize(100).withIdleTimeout(10).withCallTimeout(10000000);					
 				
-        HiveBolt hiveBolt = new HiveBolt(hiveOptions);
+        //HiveBolt hiveBolt = new HiveBolt(hiveOptions);
 
-        b.setBolt("TweetHiveBolt", hiveBolt, 1).allGrouping("TweetCounterBolt"); //$NON-NLS-1$ //$NON-NLS-2$
+        //b.setBolt("TweetHiveBolt", hiveBolt, 1).allGrouping("TweetCounterBolt"); //$NON-NLS-1$ //$NON-NLS-2$
 
         switch (type) {
             case "cluster" : //$NON-NLS-1$

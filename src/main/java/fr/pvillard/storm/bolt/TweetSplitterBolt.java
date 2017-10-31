@@ -1,4 +1,3 @@
-
 package fr.pvillard.storm.bolt;
 
 import java.util.Map;
@@ -55,12 +54,7 @@ public class TweetSplitterBolt extends BaseRichBolt {
         Status tweet = (Status) input.getValueByField("tweet"); //$NON-NLS-1$
         String text = tweet.getText();
         for (String filter : this.filters) {
-            if (text.toLowerCase().contains(filter)) {
-                int length = text.length() - 1;
-                if (length > 100) {
-                    length = 100;
-                }
-                System.out.println("Received tweet with [" + filter + "] : " + text.substring(0, length)); //$NON-NLS-1$ //$NON-NLS-2$
+            if (text.toLowerCase().contains(filter.toLowerCase())) {
                 this.collector.emit(new Values(filter, tweet));
             }
         }
